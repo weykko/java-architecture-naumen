@@ -43,4 +43,22 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>with-optional</id>
+            <activation>
+                <property>
+                    <name>optional</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <modules>
+                <module>
+                    optional
+                </module>
+            </modules>
+        </profile>
+    </profiles>
+
 </project>
