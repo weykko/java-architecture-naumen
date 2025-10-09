@@ -1,7 +1,6 @@
 package ru.naumen.collection.task2;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Дано:
@@ -36,7 +35,35 @@ public class Task2
      * Возвращает дубликаты пользователей, которые есть в обеих коллекциях
      */
     public static List<User> findDuplicates(Collection<User> collA, Collection<User> collB) {
-        // TODO реализовать метод
-        return null;
+        // Выбор коллекции: HashSet
+        // Почему именно HashSet:
+        // - Нужна быстрая проверка наличия элемента - O(1) в среднем случае
+        // - Пользователи должны иметь правильные equals() и hashCode() для корректной работы
+        // - HashSet автоматически удаляет дубликаты, что соответствует условию "дубликаты внутри коллекций можно не учитывать"
+        //
+        // Сложность алгоритма:
+        // - O(n + m), где n = размер collA, m = размер collB
+        //
+        // Обоснование почему сложность именно такая:
+        // - Создание HashSet из collA: O(n), если нет коллизий, они минимизируются за счет хорошей хешфункци
+        // - Проход по collB и проверка наличия в HashSet: O(m)
+
+        // Оптимизация: выбираем меньшую коллекцию для HashSet чтобы сэкономить память
+        Collection<User> smallerCollection = collA.size() <= collB.size() ? collA : collB;
+        Collection<User> largerCollection = collA.size() <= collB.size() ? collB : collA;
+
+        // Создаем HashSet из меньшей коллекции для экономии памяти
+        // HashSet обеспечивает O(1) для contains()
+        Set<User> userSet = new HashSet<>(smallerCollection);
+        List<User> duplicates = new ArrayList<>();
+
+        // Проходим по большей коллекции и ищем пересечения
+        for (var user : largerCollection) {
+            if (userSet.contains(user)) {
+                duplicates.add(user);
+            }
+        }
+
+        return duplicates;
     }
 }
