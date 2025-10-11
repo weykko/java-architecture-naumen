@@ -55,7 +55,9 @@ public class Task2
         // Создаем HashSet из меньшей коллекции для экономии памяти
         // HashSet обеспечивает O(1) для contains()
         Set<User> userSet = new HashSet<>(smallerCollection);
-        List<User> duplicates = new ArrayList<>();
+
+        // Создаем List с размером меньшей коллекции, чтобы его не расширять
+        List<User> duplicates = new ArrayList<>(smallerCollection.size());
 
         // Проходим по большей коллекции и ищем пересечения
         for (var user : largerCollection) {

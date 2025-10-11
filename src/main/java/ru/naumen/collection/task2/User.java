@@ -14,20 +14,21 @@ public class User {
     private String email;
     private byte[] passwordHash;
 
+    // Для HashMap важно переопределить equals и hashcode.
+    // По условию задачи считаем пользователей равными при совпадении всех трёх полей,
+    // поэтому equals и hashcode определяется по всем полям
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(username, user.username) &&
-                Objects.equals(email, user.email) &&
-                Arrays.equals(passwordHash, user.passwordHash);
+        if (!(o instanceof User user)) return false;
+
+        return Objects.equals(username, user.username)
+                && Objects.equals(email, user.email)
+                && Arrays.equals(passwordHash, user.passwordHash);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(username, email);
-        result = 31 * result + Arrays.hashCode(passwordHash);
-        return result;
+        return Objects.hash(username, email, Arrays.hashCode(passwordHash));
     }
 }
