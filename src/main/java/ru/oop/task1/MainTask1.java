@@ -22,7 +22,13 @@ public class MainTask1 {
      * Переехать из текущего места в заданную точку
      */
     public void moveTo(Person person, Position destination) {
-        // TODO
+        var car = new Car(person.getPosition());
+        car.getInto(person);
+        car.rideToNearest(destination);
+        car.getOut(person);
+        if (person.getPosition() != destination) {
+            person.walk(destination);
+        }
         assert person.getPosition() == destination;
     }
 }
