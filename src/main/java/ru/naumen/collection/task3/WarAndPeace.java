@@ -1,10 +1,7 @@
 package ru.naumen.collection.task3;
 
 import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * <p>Написать консольное приложение, которое принимает на вход произвольный текстовый файл в формате txt.
@@ -23,12 +20,13 @@ public class WarAndPeace {
 
     public static void main(String[] args) {
         // Выбор коллекций:
-        // 1. HashMap для подсчета частоты слов
-        //    Почему HashMap:
+        // 1. LinkedHashMap для подсчета частоты слов
+        //    Почему LinkedHashMap:
         //    - Быстрый доступ O(1) для обновления счетчиков
         //    - Нужно часто обновлять значения по ключу (слову)
         //    - Сложность: O(n), где n = количество всех слов
         //    - Память: O(m), где m - количество уникальных слов
+        //    - Быстрая итерация между элементами
         //
         // 2. PriorityQueue для получения TOP 10 и LAST 10
         //    Почему PriorityQueue:
@@ -42,7 +40,7 @@ public class WarAndPeace {
         // Сложность алгоритма:
         // - O(n + m), где n - количество всех слов, m - количество уникальных слов
 
-        Map<String, Integer> freqMap = new HashMap<>();
+        Map<String, Integer> freqMap = new LinkedHashMap<>();
 
         // Первый проход: подсчет частоты слов
         // Сложность: O(n) где n - общее количество слов в файле
@@ -74,17 +72,21 @@ public class WarAndPeace {
             }
         }
 
-        // Сортируем очереди
-        // Сложость O(10 log10) ~ O(1)
+        // Используем LinkedList для сборки сортированого в нужном порядке списка
+        // Операция вставки в начало за O(1)
         System.out.println("\nТоп 10 самых частых слов:");
-        top10Queue.stream()
-                .sorted((entry1, entry2) ->
-                        Integer.compare(entry2.getValue(), entry1.getValue()))
-                .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+        printResult(top10Queue);
 
         System.out.println("\nТоп 10 самых редких слов:");
-        least10Queue.stream()
-                .sorted(Comparator.comparingInt(Map.Entry::getValue))
-                .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+        printResult(least10Queue);
+    }
+
+    private static void printResult(PriorityQueue<Map.Entry<String, Integer>> queue) {
+        List<Map.Entry<String, Integer>> result = new LinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            result.addFirst(queue.poll());
+        }
+
+        result.forEach(kv -> System.out.println(kv.getKey() + ": " + kv.getValue()));
     }
 }

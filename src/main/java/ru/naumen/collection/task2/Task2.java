@@ -57,6 +57,7 @@ public class Task2
         Set<User> userSet = new HashSet<>(smallerCollection);
 
         // Создаем List с размером меньшей коллекции, чтобы его не расширять
+        // ArrayList обеспечивает O(1) для add() и реализует интерфейс List требуемый в return
         List<User> duplicates = new ArrayList<>(smallerCollection.size());
 
         // Проходим по большей коллекции и ищем пересечения
