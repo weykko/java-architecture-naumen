@@ -1,5 +1,8 @@
 package ru.naumen.collection.task1;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Дано:
  * <pre>
@@ -24,6 +27,16 @@ package ru.naumen.collection.task1;
  */
 public class Task1
 {
+    // Выбор коллекции: HashMap
+    // Почему именно HashMap:
+    // 1. Нужна быстрая операция поиска по ключу (билету) - O(1) в среднем случае
+    // 2. Ключи уникальны (каждый билет имеет уникальный id)
+    // 3. Память: HashMap использует дополнительную память для хранения узлов, но это приемлемо
+    //    для достижения требуемой скорости
+    // 4. При прочих равных скорость важнее памяти, и HashMap обеспечивает лучшую скорость поиска
+
+    private final Map<Ticket, Goods> ticketGoodsMap = new HashMap<>();
+
     public enum Goods {
         /**
          * нет товаров
@@ -40,14 +53,27 @@ public class Task1
     }
 
     /**
+     * <p>Добавить информацию о товарах для билета
+     * Сложность: O(1)</p>
+     */
+    public void addGoods(Ticket ticket, Goods goods) {
+        ticketGoodsMap.put(ticket, goods);
+    }
+
+    /**
      * Получить товары по билету
      * <p>Сложность алгоритма O(1)</p>
      *
      * <p><b>Мы не забыли определить equals и hashcode у класса {@link Ticket}</b></p>
      * <p>Достаточно их определить только для id, т.к. он уникален</p>
+     *
+     * <p>HashMap.get() имеет сложность O(1) в среднем случае благодаря:
+     * 1. Вычислению хеш-кода ключа
+     * 2. Определению бакета по хеш-коду
+     * 3. Поиску в бакете
+     * При правильной реализации hashCode() в Ticket распределение будет равномерным</p>
      */
     public Goods getGoods(Ticket ticket) {
-        // TODO реализовать
-        return null;
+        return ticketGoodsMap.getOrDefault(ticket, Goods.EMPTY);
     }
 }
