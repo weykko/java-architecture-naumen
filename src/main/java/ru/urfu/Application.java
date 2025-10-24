@@ -6,13 +6,16 @@ package ru.urfu;
 public class Application {
 
     public static void main(String[] args) {
+        MessageHandler messageHandler = new MessageHandler();
+
         String telegramBotName = System.getenv("telegram_botName");
         String telegramToken = System.getenv("telegram_token");
-        new TelegramBot(telegramBotName, telegramToken)
+
+        new TelegramBot(telegramBotName, telegramToken,  messageHandler)
                 .start();
 
         String discordToken = System.getenv("discord_token");
-        new DiscordBot(discordToken)
+        new DiscordBot(discordToken,  messageHandler)
                 .start();
 
         /*
