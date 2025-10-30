@@ -1,26 +1,16 @@
 package ru.oop.task1;
 
 /**
- * Автомобиль
+ * Класс автомобиля, использующийся для передвижения людей
  */
 public class Car {
     /**
-     * Иницилизация автомобиля в заданном месте
+     * Иницилизация автомобиля с человеком внутри
      */
-    public Car(Position position) {}
+    public Car(Person person) {}
 
     /**
      * Подьезд к ближайшему доступному месту
      */
     public void rideToNearest(Position destination) {}
-
-    /**
-     * Сесть человеку в машину
-     */
-    public void getInto(Person person) {}
-
-    /**
-     * Выйти человеку из машины
-     */
-    public void getOut(Person person) {}
 }

@@ -30,15 +30,9 @@ public class MainTask2 {
      * @see Position
      */
     public void moveTo(Person person, Position destination, Vehicle vehicle) {
-        if (person.getPosition() != vehicle.getPosition()) {
-            person.walk(vehicle.getPosition());
-        }
-        vehicle.getInto(person);
-        vehicle.rideToNearest(destination);
-        vehicle.getOut(person);
-        if (person.getPosition() != destination) {
-            person.walk(destination);
-        }
+        person.walk(vehicle.getPosition());
+        vehicle.rideToNearest(person, destination);
+        person.walk(destination);
         assert person.getPosition() == destination;
     }
 }

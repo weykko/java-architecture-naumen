@@ -1,21 +1,12 @@
 package ru.oop.task2;
 
 /**
- * Транспортное средство
+ * Класс транспортного средства, использующийся для передвижения людей
  */
 public interface Vehicle extends Positioned{
     /**
-     * Подьезд к ближайшему доступному месту
+     * Подьезд к ближайшему доступному месту, с указаным человек
      */
-    public void rideToNearest(Position destination);
+    public void rideToNearest(Person person, Position destination);
 
-    /**
-     * Сесть человеку в транспорт
-     */
-    public void getInto(Person person);
-
-    /**
-     * Выйти человеку из транспорта
-     */
-    public void getOut(Person person);
 }

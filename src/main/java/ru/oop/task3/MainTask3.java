@@ -29,16 +29,10 @@ public class MainTask3 {
      */
     public void moveTo(Person person, Position destination, List<Vehicle> vehicles) {
         vehicles.forEach(vehicle -> {
-            if (person.getPosition() != vehicle.getPosition()) {
-                person.walk(vehicle.getPosition());
-            }
-            vehicle.getInto(person);
-            vehicle.rideToNearest(destination);
-            vehicle.getOut(person);
+            person.walk(vehicle.getPosition());
+            vehicle.rideToNearest(person, destination);
         });
-        if (person.getPosition() != destination) {
-            person.walk(destination);
-        }
+        person.walk(destination);
         assert person.getPosition() == destination;
     }
 }
