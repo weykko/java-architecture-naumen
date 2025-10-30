@@ -61,15 +61,8 @@ public class WarAndPeace {
 
         // Заполняем очереди
         for (Map.Entry<String, Integer> entry : freqMap.entrySet()) {
-            top10Queue.offer(entry);
-            least10Queue.offer(entry);
-
-            if (top10Queue.size() > 10) {
-                top10Queue.poll();
-            }
-            if (least10Queue.size() > 10) {
-                least10Queue.poll();
-            }
+            addOrSkip(top10Queue, entry, true);
+            addOrSkip(least10Queue, entry, false);
         }
 
         // Используем LinkedList для сборки сортированого в нужном порядке списка
@@ -88,5 +81,16 @@ public class WarAndPeace {
         }
 
         result.forEach(kv -> System.out.println(kv.getKey() + ": " + kv.getValue()));
+    }
+
+    private static void addOrSkip(Queue<Map.Entry<String, Integer>> queue, Map.Entry<String, Integer> entry, boolean isBiggest) {
+        if (queue.size() < 10 ||
+                (isBiggest ? entry.getValue() > queue.peek().getValue() : entry.getValue() < queue.peek().getValue())
+        ) {
+            queue.offer(entry);
+            if (queue.size() > 10) {
+                queue.poll();
+            }
+        }
     }
 }
