@@ -15,11 +15,12 @@
 
         <telegrambots.version>6.9.7.1</telegrambots.version>
         <discord4j.version>3.2.9</discord4j.version>
-        <netty-all.version>4.2.7.Final</netty-all.version>
         <protobuf-java.version>4.33.0</protobuf-java.version>
         <commons-lang3.version>3.19.0</commons-lang3.version>
         <commons-codec.version>1.19.0</commons-codec.version>
-        <junit.version>RELEASE</junit.version>
+        <junit-jupiter.version>6.0.0</junit-jupiter.version>
+        <netty-handler.version>4.2.7.Final</netty-handler.version>
+        <netty-common.version>4.2.7.Final</netty-common.version>
     </properties>
 
     <dependencies>
@@ -34,8 +35,8 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -56,8 +57,14 @@
 
             <dependency>
                 <groupId>io.netty</groupId>
-                <artifactId>netty-all</artifactId>
-                <version>${netty-all.version}</version>
+                <artifactId>netty-handler</artifactId>
+                <version>${netty-handler.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-common</artifactId>
+                <version>${netty-common.version}</version>
             </dependency>
 
             <dependency>
@@ -79,9 +86,9 @@
             </dependency>
 
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit-jupiter.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
