@@ -113,21 +113,8 @@ public class BotLogicTest {
     }
 
     /**
-     * Тест команды /repeat с одним неправильным ответом
-     * Вопрос добавляется в повторение, если на него был дан неправильный ответ
-     */
-    @Test
-    public void repeatWithOneWrongAnswersShouldOneBeInRepeat() {
-        botLogic.processCommand(user, "/test");
-        botLogic.processCommand(user, "100");
-        botLogic.processCommand(user, "mistake");
-
-        botLogic.processCommand(user, "/repeat");
-        assertEquals("Сколько будет 2 + 2 * 2", testBot.getMessageById(5));
-    }
-
-    /**
      * Тест команды /repeat с неправильными ответами
+     * Вопросы добавляется в повторение, если на него был дан неправильный ответ
      * Вопросы удаляются из повторения после правильных ответов
      */
     @Test
