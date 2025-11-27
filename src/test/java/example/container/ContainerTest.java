@@ -24,7 +24,7 @@ public class ContainerTest {
      * Тестируем добавление элемента
      */
     @Test
-    void addNewItem_ShouldItemBeAdded() {
+    void addNewItemShouldItemBeAdded() {
         Item item = new Item(133);
         container.add(item);
         assertTrue(container.contains(item));
@@ -35,7 +35,7 @@ public class ContainerTest {
      * Тестируем добавление элементов на коректные индексы
      */
     @Test
-    void addNewItems_ShouldItemBeAddedOnCorrectIndex() {
+    void addNewItemsShouldItemBeAddedOnCorrectIndex() {
         Item item = new Item(133);
         Item item2 = new Item(134);
         container.add(item);
@@ -49,7 +49,7 @@ public class ContainerTest {
      * Тестируем удаление существующего элемента
      */
     @Test
-    void removeExistingItem_ShouldItemBeDeleted() {
+    void removeExistingItemShouldItemBeDeleted() {
         Item item = new Item(133);
         container.add(item);
         container.remove(item);
@@ -61,7 +61,7 @@ public class ContainerTest {
      * Тестируем удаление несуществующего элемента
      */
     @Test
-    void removeNonExistingItem_ShouldReturnFalse() {
+    void removeNonExistingItemShouldReturnFalse() {
         Item item = new Item(133);
         Item item2 = new Item(134);
         container.add(item);

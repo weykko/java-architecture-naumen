@@ -23,4 +23,11 @@ public class TestBot implements Bot {
         return messages.get(id);
     }
 
+    /**
+     * Получить последнее отправленное сообщение
+     */
+    public String getLastMessage() {
+        return messages.getLast();
+    }
+
 }

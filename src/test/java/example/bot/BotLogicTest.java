@@ -30,7 +30,7 @@ public class BotLogicTest {
      * Тест /test с правильными ответами
      */
     @Test
-    public void test_WithCorrectAnswers_ShouldSayThatRight() {
+    public void testWithCorrectAnswersShouldSayThatRight() {
         botLogic.processCommand(user, "/test");
         assertEquals("Вычислите степень: 10^2", testBot.getMessageById(0));
 
@@ -43,10 +43,10 @@ public class BotLogicTest {
     }
 
     /**
-     * Тест /test с неправильными ответами
+     * Тест команды /test с неправильными ответами
      */
     @Test
-    public void test_WithIncorrectAnswers_ShouldSayThatWrong() {
+    public void testWithIncorrectAnswersShouldSayThatWrong() {
         botLogic.processCommand(user, "/test");
         botLogic.processCommand(user, "133");
         assertEquals("Вы ошиблись, верный ответ: 100", testBot.getMessageById(1));
@@ -56,10 +56,10 @@ public class BotLogicTest {
     }
 
     /**
-     * Тест /notify с задержкой в 1 секунду
+     * Тест команды /notify с задержкой в 1 секунду
      */
     @Test
-    public void notify_WithDelayOneSecond_ShouldNotifyMe() throws InterruptedException {
+    public void notifyWithDelayOneSecondShouldNotifyMe() throws InterruptedException {
         botLogic.processCommand(user, "/notify");
 
         assertEquals("Введите текст напоминания", testBot.getMessageById(0));
@@ -69,16 +69,18 @@ public class BotLogicTest {
         botLogic.processCommand(user, "1");
         assertEquals("Напоминание установлено", testBot.getMessageById(2));
 
-        Thread.sleep(1100);
+        Thread.sleep(975);
+        assertEquals("Напоминание установлено", testBot.getLastMessage());
+        Thread.sleep(50);
 
         assertEquals("Сработало напоминание: 'notify me'", testBot.getMessageById(3));
     }
 
     /**
-     * Тест /notify с неверным форматом задержки
+     * Тест команды /notify с неверным форматом задержки
      */
     @Test
-    public void notify_WithWrongFormatDelay_ShouldSayWarning() {
+    public void notifyWithWrongFormatDelayShouldSayWarning() {
         botLogic.processCommand(user, "/notify");
         botLogic.processCommand(user, "notify me");
         botLogic.processCommand(user, "not a number");
@@ -87,10 +89,10 @@ public class BotLogicTest {
     }
 
     /**
-     * Тест /notify с отрицательной задержкой
+     * Тест команды /notify с отрицательной задержкой
      */
     @Test
-    public void notify_WithNegativeDelay_ShouldThrowException() {
+    public void notifyWithNegativeDelayShouldThrowException() {
         botLogic.processCommand(user, "/notify");
         botLogic.processCommand(user, "notify me");
 
@@ -101,21 +103,21 @@ public class BotLogicTest {
     }
 
     /**
-     * Тест /repeat без неправильных ответов
+     * Тест команды /repeat без неправильных ответов
      */
     @Test
-    public void repeat_WithNoWrongAnswers_ShouldEmptyRepeat() {
+    public void repeatWithNoWrongAnswersShouldEmptyRepeat() {
         botLogic.processCommand(user, "/repeat");
 
         assertEquals("Нет вопросов для повторения", testBot.getMessageById(0));
     }
 
     /**
-     * Тест /repeat с одним неправильным ответом
+     * Тест команды /repeat с одним неправильным ответом
      * Вопрос добавляется в повторение, если на него был дан неправильный ответ
      */
     @Test
-    public void repeat_WithOneWrongAnswers_ShouldOneBeInRepeat() {
+    public void repeatWithOneWrongAnswersShouldOneBeInRepeat() {
         botLogic.processCommand(user, "/test");
         botLogic.processCommand(user, "100");
         botLogic.processCommand(user, "mistake");
@@ -125,11 +127,11 @@ public class BotLogicTest {
     }
 
     /**
-     * Тест /repeat с неправильными ответами
+     * Тест команды /repeat с неправильными ответами
      * Вопросы удаляются из повторения после правильных ответов
      */
     @Test
-    public void repeat_WithWrongAnswers_ShouldRemoveFromRepeat() {
+    public void repeatWithWrongAnswersShouldRemoveFromRepeat() {
         botLogic.processCommand(user, "/test");
         botLogic.processCommand(user, "mistake");
         botLogic.processCommand(user, "mistake");
@@ -148,11 +150,11 @@ public class BotLogicTest {
     }
 
     /**
-     * Тест /repeat с неправильными ответами
+     * Тест команды /repeat с неправильными ответами
      * Все вопросы остаются в повторении после повторных неправильных ответов
      */
     @Test
-    public void repeat_WithWrongAnswers_ShouldKeepInRepeat(){
+    public void repeatWithWrongAnswersShouldKeepInRepeat(){
         botLogic.processCommand(user, "/test");
         botLogic.processCommand(user, "mistake");
         botLogic.processCommand(user, "mistake");
