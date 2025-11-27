@@ -32,10 +32,10 @@ public class ConsoleApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        System.out.println("=== Консольный менеджер документов ===");
+        System.out.println("=== Консольное приложение ===");
 
         while (true) {
-            System.out.println("\nКоманды: create, import, list, export, exit");
+            System.out.println("\nКоманды: import, list, create, export, exit");
             System.out.print("> ");
             String cmd = scanner.nextLine().trim();
 
@@ -45,7 +45,6 @@ public class ConsoleApp implements CommandLineRunner {
                 case "list" -> commandHandler.handleList();
                 case "export" -> commandHandler.handleExport();
                 case "exit" -> {
-                    System.out.println("До свидания!");
                     return;
                 }
                 default -> System.out.println("Неизвестная команда");
