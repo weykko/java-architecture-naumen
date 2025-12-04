@@ -58,7 +58,7 @@ public class MatrixInitializer {
                 ? matrix[i - 1][j]
                 : 0L;
         long left = j > 0
-                ? matrix[i + 1][j - 1]
+                ? matrix[i][j - 1]
                 : 1L;
         return ((left - up + i) * (j / 10 + 1)) / 8;
     }
