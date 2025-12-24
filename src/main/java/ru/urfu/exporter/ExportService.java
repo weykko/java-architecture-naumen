@@ -20,21 +20,20 @@ import java.util.stream.Collectors;
 public class ExportService {
 
     private final Map<String, DocumentExporter> exporters;
-    private final Path outputDirectory;
+    private static final Path OUTPUT_DIR =
+            Path.of(System.getProperty("user.home"), "lessonSOLID");
 
     /**
      * Конструктор с инжекцией всех доступных экспортёров.
      *
      * @param exporterList список всех экспортёров, зарегистрированных в Spring контексте
-     * @param outputDirectory директория для сохранения экспортированных файлов
      */
-    public ExportService(List<DocumentExporter> exporterList, Path outputDirectory) {
+    public ExportService(List<DocumentExporter> exporterList) {
         this.exporters = exporterList.stream()
                 .collect(Collectors.toMap(
                         DocumentExporter::getFormat,
                         Function.identity()
                 ));
-        this.outputDirectory = outputDirectory;
     }
 
     /**
@@ -50,9 +49,9 @@ public class ExportService {
         DocumentExporter exporter = getExporter(format)
                 .orElseThrow(() -> new IllegalArgumentException("Неподдерживаемый формат: " + format));
 
-        Files.createDirectories(outputDirectory);
+        Files.createDirectories(OUTPUT_DIR);
 
-        Path outputPath = outputDirectory.resolve(document.name() + "." + format);
+        Path outputPath = OUTPUT_DIR.resolve(document.name() + "." + format);
         exporter.export(document, outputPath);
 
         return outputPath;
@@ -64,7 +63,7 @@ public class ExportService {
      * @param format формат экспорта
      * @return Optional с экспортёром или пустой Optional, если формат не поддерживается
      */
-    public Optional<DocumentExporter> getExporter(String format) {
+    private Optional<DocumentExporter> getExporter(String format) {
         return Optional.ofNullable(exporters.get(format.toLowerCase()));
     }
 

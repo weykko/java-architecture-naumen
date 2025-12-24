@@ -39,7 +39,10 @@ public class CommandHandler {
         StringBuilder content = new StringBuilder();
         while (true) {
             String line = scanner.nextLine();
-            if (line.isEmpty()) break;
+            if (line.isEmpty()) {
+                break;
+            }
+
             content.append(line).append(System.lineSeparator());
         }
 
